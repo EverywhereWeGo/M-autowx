@@ -59,9 +59,9 @@ def get_news():
 
         id = info["id"]
         if id not in oldstatus:
-            print(text + str(picurl) + str(retweeted))
+            print(text + "\n" + str(picurl) + "\n" + str(retweeted))
             oldstatus.append(id)
-            mail(text + str(picurl) + str(retweeted))
+            mail(text + "\n" + str(picurl) + "\n" + str(retweeted))
     print oldstatus
 
 
