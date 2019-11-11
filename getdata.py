@@ -5,6 +5,7 @@ from threading import Timer
 import requests
 import json
 import sys
+
 reload(sys)
 sys.setdefaultencoding('utf8')
 
@@ -23,12 +24,17 @@ oldstatus = ["4432072237827758",
 
 
 def gethttp():
-    response = requests.post('https://m.weibo.cn/profile/info?uid=3687300407')
+    response = requests.post('https://m.weibo.cn/profile/info?uid=7136225579')
+    # response = requests.post('https://m.weibo.cn/profile/info?uid=3687300407')
+    # response = requests.post('https://m.weibo.cn/profile/info?uid=5556273965')
+
     # byte转str
     result = response.content.decode('utf-8')
 
     # str转json
     all_news = json.loads(result)
+    print(type(all_news))
+    print(all_news)
 
     infos = all_news["data"]["statuses"]
     print(infos)
@@ -40,15 +46,27 @@ def get_news():
     # 遍历由json数据得到的list
     for info in infosaaa:
         text = info["text"]
+
+        picurl = []
+        if "pics" in info.keys():
+            for pic in info["pics"]:
+                # print(pic["large"]["url"])
+                picurl.append(pic["large"]["url"])
+
+        retweeted = []
+        if "retweeted_status" in info.keys():
+            print (info["retweeted_status"]["text"])
+            retweeted.append(info["retweeted_status"]["text"])
+
         id = info["id"]
         if id not in oldstatus:
-            print(text)
+            print(text + str(picurl) + str(retweeted))
             oldstatus.append(id)
-            # mail(text)
+            mail(text + str(picurl) + str(retweeted))
     print oldstatus
 
 
 if __name__ == "__main__":
     while True:
         get_news()
-        time.sleep(60 * 60)
+        time.sleep(10 * 60)
