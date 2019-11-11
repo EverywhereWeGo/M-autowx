@@ -33,11 +33,10 @@ def gethttp():
 
     # str转json
     all_news = json.loads(result)
-    print(type(all_news))
-    print(all_news)
+    # print(all_news)
 
     infos = all_news["data"]["statuses"]
-    print(infos)
+    # print(infos)
     return infos
 
 
