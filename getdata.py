@@ -53,6 +53,8 @@ def get_news():
             retweeted = ''
             if "retweeted_status" in info.keys():
                 retweeted = (info["retweeted_status"]["text"])
+
+            # 发送
             print("正文:\n\t" + text + "\n图片:\n\t" + "\n\t".join(picurl) + "\n转发:\n\t" + retweeted)
             append_file('code.txt', idnum)
             mail("正文:\n\t" + text + "\n图片:\n\t" + "\n\t".join(picurl) + "\n转发:\n\t" + retweeted)
