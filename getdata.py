@@ -50,14 +50,12 @@ def get_news():
                     picurl.append(pic["large"]["url"])
 
             # 转发内容
-            retweeted = []
+            retweeted = ''
             if "retweeted_status" in info.keys():
-                print (info["retweeted_status"]["text"])
-                retweeted.append(info["retweeted_status"]["text"])
-
-            print(text + "\n" + str(picurl) + "\n" + str(retweeted))
+                retweeted = (info["retweeted_status"]["text"])
+            print("正文:\n\t" + text + "\n图片:\n\t" + "\n\t".join(picurl) + "\n转发:\n\t" + retweeted)
             append_file('code.txt', idnum)
-            mail(text + "\n" + str(picurl) + "\n" + str(retweeted))
+            mail("正文:\n\t" + text + "\n图片:\n\t" + "\n\t".join(picurl) + "\n转发:\n\t" + retweeted)
 
 
 if __name__ == "__main__":
